@@ -14,7 +14,7 @@ def reemplazos(v):
 pip.main(['install', 'plotly_express'])
 pip.main(["install","openpyxl"])
 
-st.title("FUNNEL Y TRACKING DE ACTIVACASH 2.0 CON ONBOARDING")
+st.title("FUNNEL Y TRACKING DE INVER+")
 st.text('La presente página permite visualizar el comportamiento generalizado de los socios en la aplicacion.')
 #df=pd.read_excel('PROCESOS_PIVOTE.xlsx')
 
@@ -22,7 +22,7 @@ st.text('La presente página permite visualizar el comportamiento generalizado d
 #st.write(df_2)
 
 st.markdown(f' FUNNEL')
-fun=pd.read_csv('FUNEL.csv',encoding='latin-1')
+df=pd.read_csv('FUNEL (1).csv',encoding='latin-1')
 #fig = px.funnel(data, x='number', y='stage')
 #st.ploty_chart(fig)
 #fig.show()
@@ -30,12 +30,12 @@ fun=pd.read_csv('FUNEL.csv',encoding='latin-1')
 #data = dict(
  #   number=[39, 27.4, 20.6, 11, 2],
   #  stage=["Website visit", "Downloads", "Potential customers", "Requested price", "invoice sent"])
-fig = px.funnel(fun, x=fun['FRECUENCIA'], y=fun['PASO'])
+fig = px.funnel(df, x=df['FRECUENCIA'], y=df['PASO'])
 st.plotly_chart(fig)
 
-st.markdown(f' FUNNEL MENSUAL')
-st.text('El siguiente diagrama muestra la actividad del ultimo mes.')
-fun=pd.read_csv('FUNEL2.csv',encoding='latin-1')
+st.markdown(f' FUNNEL')
+st.text('El funnel correspondiente al ultimo mes es el siguiente.')
+df=pd.read_csv('FUNEL (12).csv',encoding='latin-1')
 #fig = px.funnel(data, x='number', y='stage')
 #st.ploty_chart(fig)
 #fig.show()
@@ -43,12 +43,12 @@ fun=pd.read_csv('FUNEL2.csv',encoding='latin-1')
 #data = dict(
  #   number=[39, 27.4, 20.6, 11, 2],
   #  stage=["Website visit", "Downloads", "Potential customers", "Requested price", "invoice sent"])
-fig = px.funnel(fun, x=fun['FRECUENCIA'], y=fun['PASO'])
+fig = px.funnel(df, x=df['FRECUENCIA'], y=df['PASO'])
 st.plotly_chart(fig)
 
-st.markdown(f' FUNNEL DIARIO')
-st.text('El siguiente diagrama muestra la actividad del ultimo dia.')
-fun=pd.read_csv('FUNEL3.csv',encoding='latin-1')
+st.markdown(f' FUNNEL')
+st.text('El funnel correspondiente al dia de ayer es el siguiente.')
+df=pd.read_csv('FUNEL (13).csv',encoding='latin-1')
 #fig = px.funnel(data, x='number', y='stage')
 #st.ploty_chart(fig)
 #fig.show()
@@ -56,21 +56,21 @@ fun=pd.read_csv('FUNEL3.csv',encoding='latin-1')
 #data = dict(
  #   number=[39, 27.4, 20.6, 11, 2],
   #  stage=["Website visit", "Downloads", "Potential customers", "Requested price", "invoice sent"])
-fig = px.funnel(fun, x=fun['FRECUENCIA'], y=fun['PASO'])
+fig = px.funnel(df, x=df['FRECUENCIA'], y=df['PASO'])
 st.plotly_chart(fig)
 
-st.markdown(f' AFLUENCIA DIARIA EN EL ONBOARDING 2.0')
-chart_data = pd.read_csv('FECHAS.csv',encoding='latin-1')
+st.markdown(f' AFLUENCIA DIARIA')
+chart_data = pd.read_csv('FECHAS (1).csv',encoding='latin-1')
 chart_data = chart_data.drop('Unnamed: 0',axis=1)
 chart_data = chart_data.set_index('FECHA')
 st.bar_chart(chart_data)
 #st.image('BARRAS.png',caption='EVOLUCION DE LA ACTIVIDAD')
 
 st.text('Estos valores corresponden a los ingresos identificados en las siguientes ubicaciones.')
-df=pd.read_csv('COORDENADAS.csv',encoding='latin-1')
+df=pd.read_csv('COORDENADAS (1).csv',encoding='latin-1')
 df=df.rename(columns={'LATITUD':'lat','LONGITUD':'lon'})
 chart_data = df
- 
+
 st.pydeck_chart(pdk.Deck(
     map_style=None,
     initial_view_state=pdk.ViewState(
@@ -100,77 +100,18 @@ st.pydeck_chart(pdk.Deck(
     ],
 ))
 
-
-#st.markdown(f' RESUMEN')
-#df=pd.read_csv('RESUMEN.csv',encoding='latin-1')
-#df=df.drop('Unnamed: 0',axis=1)
-#st.text('Con la finalidad de presentar de manera rápida los resultados reelevantes acerca del uso de la app, se muestra a continuación esquema de concentración.')
-#st.write(df)
-#st.text('Los cuales poseen los siguientes valores porcentuales:')
-#fig=px.pie(df,values='SOCIOS',names='PROCESO')#,width=500,height=400)
-#st.plotly_chart(fig)
-
-
-#st.markdown(f' ABANDONARON EN HOME O DATOS PERSONALES')
-#df=pd.read_csv('POR EVALUAR.csv',encoding='latin-1')
-#df=df.drop('Unnamed: 0',axis=1)
-#df['CELULAR']=list(map(reemplazos,df['CELULAR']))
-#st.write(df)
-
-
-#st.markdown(f' APROBADOS QUE ABANDONARON DURANTE EL PROCESO')
-#df=pd.read_csv('EN PROCESO.csv',encoding='latin-1')
-#df=df.drop('Unnamed: 0',axis=1)
-#df['CELULAR']=list(map(reemplazos,df['CELULAR']))
-#st.write(df)
-
-
-st.markdown(f' RECHAZADOS')
-df=pd.read_csv('RECHAZADO.csv',encoding='latin-1')
-df=df.drop('Unnamed: 0',axis=1)
-df['CELULAR']=list(map(reemplazos,df['CELULAR']))
-rechazo=len(df)
-st.write(df)
-
 st.markdown(f' SISTEMA OPERATIVO')
-df=pd.read_csv('SO.csv',encoding='latin-1')
+df=pd.read_csv('SO (1).csv',encoding='latin-1')
 df=df.drop('Unnamed: 0',axis=1)
 st.text('Las visitas obtenidas corresponden al uso de los siguientes sistemas operativos.')
 fig=px.pie(df, values='FRECUENCIA', names='SISTEMA')#,width=500,height=400)
 st.plotly_chart(fig)
 
 st.markdown(f' NAVEGADOR')
-df=pd.read_csv('NAVEGADOR.csv',encoding='latin-1')
+df=pd.read_csv('NAVEGADOR (1).csv',encoding='latin-1')
 df=df.drop('Unnamed: 0',axis=1)
 st.text('Como enfoque adicional se puede identificar el navegador implementado como se muestra a continuación.')
 fig=px.pie(df,values='FRECUENCIA',names='NAVEGADOR',width=500,height=400)
 #,width=500,height=400)
 st.plotly_chart(fig)
 
-st.markdown(f' MENSAJE DE RECHAZO')
-df=pd.read_csv('MENSAJE_RECHAZO.csv',encoding='latin-1')
-df=df.drop('Unnamed: 0',axis=1)
-st.text('Es posible identificar el motivo de rechazo por el cual el proceso se suspendió.')
-fig=px.pie(df,values='FRECUENCIA',names='MENSAJE_RECHAZO',width=750,height=500)
-st.plotly_chart(fig)
-
-st.markdown(f'SEGMENTACION DE EVALUADOS (ACUMULADO)')
-df=pd.read_csv('AP_RE_TOTAL.csv',encoding='latin-1')
-df=df.drop('Unnamed: 0',axis=1)
-st.text('Se puede realizar una segmentación de los usuarios evaluados.')
-fig=px.pie(df,values='FRECUENCIA',names='ETIQUETA',width=750,height=500)
-st.plotly_chart(fig)
-
-st.markdown(f'SEGMENTACION DE EVALUADOS (MENSUAL)')
-df=pd.read_csv('AP_RE_MENSUAL.csv',encoding='latin-1')
-df=df.drop('Unnamed: 0',axis=1)
-st.text('Se puede realizar una segmentación de los usuarios evaluados.')
-fig=px.pie(df,values='FRECUENCIA',names='ETIQUETA',width=750,height=500)
-st.plotly_chart(fig)
-
-st.markdown(f'SEGMENTACION DE EVALUADOS (DIARIO)')
-df=pd.read_csv('AP_RE_DIARIO.csv',encoding='latin-1')
-df=df.drop('Unnamed: 0',axis=1)
-st.text('Se puede realizar una segmentación de los usuarios evaluados.')
-fig=px.pie(df,values='FRECUENCIA',names='ETIQUETA',width=750,height=500)
-st.plotly_chart(fig)
